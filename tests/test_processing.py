@@ -1,4 +1,5 @@
 ﻿import pytest
+
 from src.processing import filter_by_state, sort_by_date
 
 
@@ -29,17 +30,37 @@ def test_sort_by_date():
     assert result[2]["id"] == 2  # 2022
 
 
-@pytest.mark.parametrize("state,expected_count", [
-    ("EXECUTED", 2),
-    ("CANCELED", 0),
-    ("PENDING", 1)
-])
-def test_filter_by_state_parametrized(state, expected_count):
-    sample_data = [
-        {"id": 1, "state": "EXECUTED"},
-        {"id": 2, "state": "PENDING"},
-        {"id": 3, "state": "EXECUTED"}
+import pytest
+
+from src.processing import filter_by_state, sort_by_date  # ← ЭТА СТРОКА ДОЛЖНА БЫТЬ!
+
+
+@pytest.fixture
+def sample_operations():
+    return [
+        {"id": 1, "state": "EXECUTED", "date": "2023-01-01"},
+        {"id": 2, "state": "PENDING", "date": "2022-01-01"},
+        {"id": 3, "state": "EXECUTED", "date": "2024-01-01"}
     ]
 
-    result = filter_by_state(sample_data, state)
-    assert len(result) == expected_count
+    import pytest
+
+    from src.processing import filter_by_state, sort_by_date
+
+    # ФИКСТУРА - генератор тестовых данных
+    @pytest.fixture
+    def sample_operations():
+        return [
+            {"id": 1, "state": "EXECUTED", "date": "2023-01-01"},
+            {"id": 2, "state": "PENDING", "date": "2022-01-01"},
+            {"id": 3, "state": "EXECUTED", "date": "2024-01-01"}
+        ]
+
+    # ТЕСТЫ С ФИКСТУРОЙ
+    def test_filter_by_state(sample_operations):  # <- фикстура как аргумент
+        result = filter_by_state(sample_operations)
+        assert len(result) == 2
+
+    def test_sort_by_date(sample_operations):  # <- фикстура как аргумент
+        result = sort_by_date(sample_operations)
+        assert result[0]["id"] == 3

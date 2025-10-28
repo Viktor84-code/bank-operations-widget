@@ -1,4 +1,4 @@
-﻿from src.widget import mask_account_card, get_date
+﻿from src.widget import get_date, mask_account_card
 
 # Тестируем маскировку
 print(mask_account_card('Visa Platinum 7000792289606361'))
