@@ -17,3 +17,14 @@
 
 ```python
 from src.processing import filter_by_state, sort_by_date
+
+## Генераторы
+
+### filter_by_currency(transactions, currency)
+Фильтрует транзакции по валюте.
+
+### transaction_descriptions(transactions)  
+Возвращает описания транзакций.
+
+### card_number_generator(start, end)
+Генерирует номера карт в диапазоне.
