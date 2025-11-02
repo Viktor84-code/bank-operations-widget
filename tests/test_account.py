@@ -1,4 +1,5 @@
-from src.masks.account import get_mask_card_number, get_mask_account
+from src.masks.account import get_mask_account, get_mask_card_number
+
 
 def test_get_mask_card_number():
     """Тестируем маскировку номера карты."""
