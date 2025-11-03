@@ -16,6 +16,4 @@ Thumbs.db
 .coverage
 htmlcov/
 
-# Test coverage
-.coverage
-htmlcov/
+
