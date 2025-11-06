@@ -2,6 +2,26 @@ import datetime
 
 
 def log(filename=None):
+    """
+    Декоратор для логирования выполнения функций.
+
+    Args:
+        filename (str, optional): Имя файла для записи логов.
+                                Если не указано, логи выводятся в консоль.
+
+    Returns:
+        function: Декоратор с логированием.
+
+    Example:
+        >>> @log()
+        ... def add(a, b):
+        ...     return a + b
+        ...
+        >>> @log(filename="operations.log")
+        ... def multiply(x, y):
+        ...     return x * y
+    """
+
     def decorator(func):
         def wrapper(*args, **kwargs):
             # Логируем начало выполнения
@@ -10,7 +30,6 @@ def log(filename=None):
             try:
                 # Вызываем исходную функцию
                 result = func(*args, **kwargs)
-
                 # Логируем успешное выполнение
                 log_message = f"{func.__name__} ok at {start_time}\n"
 
