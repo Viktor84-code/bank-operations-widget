@@ -33,4 +33,24 @@ from src.processing import filter_by_state, sort_by_date
 
 ```powershell
 pytest --cov=src --cov-report=html tests/
+```
+
+## Декораторы
+
+### `@log(filename=None)`
+Декоратор для логирования выполнения функций.
+
+```python
+from src.decorators.decorators import log
+
+@log()
+def add(a, b):
+    return a + b
+
+@log(filename="operations.log")
+def multiply(x, y):
+    return x * y
+```
+
+
 
