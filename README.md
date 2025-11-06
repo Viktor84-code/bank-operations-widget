@@ -28,3 +28,9 @@ from src.processing import filter_by_state, sort_by_date
 
 ### card_number_generator(start, end)
 Генерирует номера карт в диапазоне.
+
+## Генерация HTML отчёта покрытия
+
+```powershell
+pytest --cov=src --cov-report=html tests/
+
