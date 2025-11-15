@@ -28,8 +28,8 @@ def test_load_operations_with_mock():
             mock_json.return_value = mock_data
             result = load_operations('test.json')
 
-            mock_file.assert_called_once_with('test.json', 'r', encoding='utf-8')
             assert result == mock_data
+            mock_file.assert_called_once_with('test.json', 'r', encoding='utf-8-sig')
 
 
 def test_load_operations_invalid_json_with_mock():
