@@ -1,4 +1,4 @@
-﻿from src.masks import get_mask_account, get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(card_info: str) -> str:
@@ -28,9 +28,7 @@ def get_date(date_string: str) -> str:
     """
     # Шаг 1: Разделяем строку по 'T' и берём первую часть (дату)
     date_part = date_string.split("T")[0]
-
     # Шаг 2: Разделяем дату по '-' на год, месяц, день
     year, month, day = date_part.split("-")
-
     # Шаг 3: Собираем в формате ДД.ММ.ГГГГ
     return f"{day}.{month}.{year}"
