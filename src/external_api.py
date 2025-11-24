@@ -1,4 +1,5 @@
 import os
+from typing import Any, Dict
 
 import requests
 from dotenv import load_dotenv
@@ -6,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def convert_amount_to_rub(transaction: dict) -> float:
+def convert_amount_to_rub(transaction: Dict[str, Any]) -> float:
     """
     Конвертирует сумму транзакции в рубли через APILayer Convert endpoint
     """
