@@ -1,4 +1,4 @@
-from patterns import process_bank_search, process_bank_operations
+from patterns import process_bank_search
 from processing import load_operations, filter_by_state, sort_by_date
 
 def main():
@@ -15,6 +15,8 @@ def main():
         # Загружаем данные
         operations = load_operations("data/operations.json")
         print(f"Загружено операций: {len(operations)}")
+
+        filtered_operations = operations  # начинаем с всех операций
         print("Введите статус, по которому необходимо выполнить фильтрацию.")
         print("Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING")
 
@@ -81,19 +83,36 @@ def main():
     currency_choice = input("Выводить только рублевые транзакции? Да/Нет: ").lower()
     if currency_choice == "да":
         print("Вывод только рублевых транзакций")
-        # Тут будет реальная фильтрация
+
+        # РЕАЛЬНАЯ ФИЛЬТРАЦИЯ ПО ВАЛЮТЕ
+        rub_operations = [op for op in filtered_operations if op.get("currency") == "RUB"]
+        filtered_operations = rub_operations
+        print(f"Рублевых транзакций: {len(filtered_operations)}")
     else:
         print("Вывод всех транзакций независимо от валюты")
 
     # Фильтрация по слову в описании
     search_choice = input("Отфильтровать список транзакций по определенному слову в описании? Да/Нет: ").lower()
-
     if search_choice == "да":
         search_word = input("Введите слово для поиска в описании: ")
         print(f"Фильтрация по слову '{search_word}'")
-        # Тут будет вызов нашей функции process_bank_search
+        # ИСПОЛЬЗУЕМ НАШУ ФУНКЦИЮ С РЕГУЛЯРКАМИ!
+        filtered_operations = process_bank_search(filtered_operations, search_word)
+        print(f"После поиска по слову осталось: {len(filtered_operations)} операций")
     else:
         print("Фильтрация по описанию не применяется")
+
+    # Вывод итоговых результатов
+    print("\nРаспечатываю итоговый список транзакций...")
+    print(f"Всего банковских операций в выборке: {len(filtered_operations)}")
+
+    if len(filtered_operations) == 0:
+        print("Не найдено ни одной транзакции, подходящей под ваши условия фильтрации")
+    else:
+        # Пока простой вывод, потом сделаем красивый
+        for operation in filtered_operations:
+            print(f"- {operation['date']} {operation['description']}")
+
 
 
 if __name__ == "__main__":

@@ -18,6 +18,10 @@ def process_bank_operations(data: list[dict], categories: list) -> dict:
     """
     result = {}
     for category in categories:
-        # Тут будет логика подсчета
-        pass
+        # Используем регулярку для поиска категории в описании
+        count = 0
+        for operation in data:
+            if re.search(category, operation['description'], re.IGNORECASE):
+                count += 1
+        result[category] = count
     return result
