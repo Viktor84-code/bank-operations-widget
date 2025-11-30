@@ -1,19 +1,30 @@
-# Bank Operations Widget
+﻿# Bank Operations Widget
 
-Проект для работы с банковскими операциями.
+Project for working with bank operations.
 
-## Функции
+## Functions
 
-- `filter_by_state()` - фильтрация операций по статусу
-- `sort_by_date()` - сортировка операций по дате
-- Маскировать номера карт и счетов
+### Main Functions
+- filter_by_state() - filter operations by status
+- sort_by_date() - sort operations by date
+- Mask card and account numbers
 
-## Установка
+### New Functions (CSV/Excel Data Reading)
+- read_csv_data() - read data from CSV files using pandas
+- read_excel_data() - read data from Excel files using pandas
+- load_financial_data() - universal data loading from CSV or Excel
 
-1. Клонируйте репозиторий
-2. Установите зависимости: `pip install -r requirements.txt`
+## Installation
+1. Clone the repository
+2. Install dependencies: pip install -r requirements.txt
 
-## Использование
-
-```python
+## Usage
 from src.processing import filter_by_state, sort_by_date
+from src.pandas_processing import load_financial_data
+
+Load data from CSV/Excel
+operations = load_financial_data("data/transactions.csv")
+
+Filter and sort
+filtered_operations = filter_by_state(operations, "EXECUTED")
+sorted_operations = sort_by_date(filtered_operations)
