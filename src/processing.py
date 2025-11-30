@@ -30,3 +30,24 @@ def sort_by_date(operations: List[Dict[str, Any]], reverse: bool = True) -> List
         operations,
         key=lambda operation: operation.get("date", ""),
         reverse=reverse)
+def load_operations(file_path: str) -> List[Dict[str, Any]]:
+    """
+    Загружает операции из файла (заглушка для демонстрации)
+    """
+    # Пока возвращаем тестовые данные
+    return [
+        {
+            "date": "2023-10-01",
+            "description": "Перевод организации",
+            "state": "EXECUTED",
+            "amount": "1000",
+            "currency": "RUB"
+        },
+        {
+            "date": "2023-09-15",
+            "description": "Открытие вклада",
+            "state": "EXECUTED",
+            "amount": "500",
+            "currency": "USD"
+        }
+    ]

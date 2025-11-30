@@ -1,3 +1,6 @@
+from patterns import process_bank_search, process_bank_operations
+from processing import load_operations, filter_by_state, sort_by_date
+
 def main():
     print("Привет! Добро пожаловать в программу работы с банковскими транзакциями.")
     print("Выберите необходимый пункт меню:")
@@ -9,8 +12,9 @@ def main():
 
     if choice == "1":
         print("Для обработки выбран JSON-файл.")
-        # Тут будет вызов функции для JSON
-
+        # Загружаем данные
+        operations = load_operations("data/operations.json")
+        print(f"Загружено операций: {len(operations)}")
         print("Введите статус, по которому необходимо выполнить фильтрацию.")
         print("Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING")
 
@@ -18,6 +22,9 @@ def main():
             status = input("Статус: ").strip().upper()
             if status in ["EXECUTED", "CANCELED", "PENDING"]:
                 print(f"Операции отфильтрованы по статусу '{status}'")
+                # РЕАЛЬНАЯ ФИЛЬТРАЦИЯ
+                filtered_operations = filter_by_state(operations, status)
+                print(f"После фильтрации осталось: {len(filtered_operations)} операций")
                 break
             else:
                 print(f"Статус операции '{status}' недоступен.")
@@ -55,14 +62,16 @@ def main():
     else:
         print("Неверный выбор.")
 
-    # Сортировка по дате
+        # Сортировка по дате
     sort_choice = input("Отсортировать операции по дате? Да/Нет: ").lower()
     if sort_choice == "да":
         sort_order = input("Отсортировать по возрастанию или по убыванию? ").lower()
         if sort_order == "по возрастанию":
             print("Сортировка по возрастанию даты")
+            filtered_operations = sort_by_date(filtered_operations, reverse=False)
         elif sort_order == "по убыванию":
             print("Сортировка по убыванию даты")
+            filtered_operations = sort_by_date(filtered_operations, reverse=True)
         else:
             print("Неверный выбор сортировки")
     else:
