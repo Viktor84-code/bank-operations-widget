@@ -1,6 +1,7 @@
 import re
 from collections import Counter
 
+
 def process_bank_search(data: list[dict], search: str) -> list[dict]:
     """
     Фильтрует операции по строке поиска в описании

@@ -1,7 +1,12 @@
 from patterns import process_bank_search
-from processing import load_operations, filter_by_state, sort_by_date
+from processing import filter_by_state, load_operations, sort_by_date
+
 
 def main() -> None:
+    """
+    Основная функция программы - предоставляет пользовательский интерфейс
+    для работы с банковскими транзакциями.
+    """
     print("Привет! Добро пожаловать в программу работы с банковскими транзакциями.")
     print("Выберите необходимый пункт меню:")
     print("1. Получить информацию о транзакциях из JSON-файла")
@@ -112,7 +117,6 @@ def main() -> None:
         # Пока простой вывод, потом сделаем красивый
         for operation in filtered_operations:
             print(f"- {operation['date']} {operation['description']}")
-
 
 
 if __name__ == "__main__":
