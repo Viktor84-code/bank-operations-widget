@@ -1,7 +1,7 @@
 from patterns import process_bank_search
 from processing import load_operations, filter_by_state, sort_by_date
 
-def main():
+def main() -> None:
     print("Привет! Добро пожаловать в программу работы с банковскими транзакциями.")
     print("Выберите необходимый пункт меню:")
     print("1. Получить информацию о транзакциях из JSON-файла")

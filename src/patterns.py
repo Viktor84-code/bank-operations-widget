@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 
 def process_bank_search(data: list[dict], search: str) -> list[dict]:
     """
@@ -12,16 +13,18 @@ def process_bank_search(data: list[dict], search: str) -> list[dict]:
             result.append(operation)
     return result
 
+
 def process_bank_operations(data: list[dict], categories: list) -> dict:
     """
-    Подсчитывает количество операций по категориям
+    Подсчитывает количество операций по категориям с использованием Counter
     """
-    result = {}
-    for category in categories:
-        # Используем регулярку для поиска категории в описании
-        count = 0
-        for operation in data:
-            if re.search(category, operation['description'], re.IGNORECASE):
-                count += 1
-        result[category] = count
-    return result
+    counts: Counter[str] = Counter()  # ← ДОБАВЛЯЕМ АННОТАЦИЮ ТИПА
+
+    for operation in data:
+        description = operation['description'].lower()
+        for category in categories:
+            # Используем регулярку для поиска категории в описании
+            if re.search(category.lower(), description):
+                counts[category] += 1
+
+    return dict(counts)
