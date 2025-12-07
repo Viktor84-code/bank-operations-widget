@@ -1,0 +1,7 @@
+[mypy]
+python_version = 3.9
+warn_return_any = True
+disallow_untyped_defs = True
+
+[mypy-pandas.*]
+ignore_missing_imports = True

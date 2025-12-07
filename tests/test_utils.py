@@ -1,7 +1,7 @@
 import json
 from unittest.mock import mock_open, patch
 
-from src.utils import load_operations
+from src.processing import load_operations
 
 
 def test_load_operations_empty_file():

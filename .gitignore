@@ -23,3 +23,9 @@ htmlcov/
 # Temporary files
 test_*.py
 temp_*.py
+!tests/test_*.py
+
+# Python cache
+__pycache__/
+*.pyc
+logs/

@@ -1,14 +1,19 @@
-"""Тесты для модуля pandas_processing с использованием Mock"""
-import sys
 import os
-from unittest.mock import patch, MagicMock
+import sys
+from unittest.mock import MagicMock, patch
+
+from src.pandas_processing import (load_financial_data, read_csv_data,
+                                   read_excel_data)
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from src.pandas_processing import read_csv_data, read_excel_data, load_financial_data
-
+"""
+Тесты для модуля pandas_processing с использованием Mock
+"""
 
 # Тесты с реальными файлами
+
+
 def test_read_csv_data_success():
     """Тест успешного чтения CSV файла"""
     file_path = "data/transactions.csv"

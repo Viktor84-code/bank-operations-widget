@@ -1,3 +1,4 @@
+import json
 from typing import Any, Dict, List
 
 
@@ -30,3 +31,15 @@ def sort_by_date(operations: List[Dict[str, Any]], reverse: bool = True) -> List
         operations,
         key=lambda operation: operation.get("date", ""),
         reverse=reverse)
+
+
+def load_operations(file_path: str) -> List[Dict[str, Any]]:
+    """
+    Загружает операции из JSON файла
+    """
+    try:
+        with open(file_path, 'r', encoding='utf-8-sig') as file:  # ← МЕНЯЕМ НА utf-8-sig
+            data = json.load(file)
+            return data if isinstance(data, list) else []
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
